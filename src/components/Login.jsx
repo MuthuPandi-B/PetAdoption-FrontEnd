@@ -9,14 +9,17 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await api.post("/auth/login", { email, password });
+     console.log(response.data);
+      // console.log(response.data);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("role", response.data.role);
       toast.success(response.data.message);
       setError(null);
       navigate("/");

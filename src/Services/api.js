@@ -17,5 +17,10 @@ api.interceptors.request.use(
          Promise.reject(error);   
     }   
 );
+export const getFilteredPets = async (filters) => {
+    const params = new URLSearchParams(filters).toString();
+    const response = await api.get(`/pets/get?${params}`);
+    return response.data;
+  };
 
 export default api;

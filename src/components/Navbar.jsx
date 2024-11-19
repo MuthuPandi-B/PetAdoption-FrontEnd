@@ -3,13 +3,17 @@ import { Link, useNavigate } from 'react-router-dom';
 const Navbar = () => {
 const navigate = useNavigate();
 const isAuthenticated = !!localStorage.getItem('token');
-const isShelter = !!localStorage.getItem('role')==="shelter";
-const isUser = !!localStorage.getItem('role')==="user";
-const isfoster = !!localStorage.getItem('role')==="foster";
+const isShelter = localStorage.getItem('role')==="shelter";
+const isAdopter = localStorage.getItem('role')==="adopter";
+
+
+
+
+const isfoster = localStorage.getItem('role')==="foster";
 const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
-    navigate('/login');
+    navigate('/');
 };
     return (
         <div>
@@ -21,10 +25,10 @@ const handleLogout = () => {
                             <Link to='/' className='hover:text-gray-300'>Home</Link>
                         </li>
                         {isShelter? <li>
-                            <Link to='/shelters' className='hover:text-gray-300'>Shelters</Link>
+                            <Link to='/createpet' className='hover:text-gray-300'>Create Pet</Link>
                         </li>: null}
-                        {isUser? <li>
-                            <Link to='/ApplicationForm' className='hover:text-gray-300'>Application</Link>
+                        {isAdopter? <li>
+                            <Link to='/createApplication' className='hover:text-gray-300'>Application</Link>
                         </li>: null}
                         {isfoster? <li>
                             <Link to='/fosters' className='hover:text-gray-300'>Fosters</Link>

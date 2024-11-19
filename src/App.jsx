@@ -5,7 +5,10 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import ApplicationForm from "./components/ApplicationForm";
+import CreatePetPage from "./pages/CreatePetPage";
+
+import Footer from "./components/Footer";
+import CreateApplicationPage from "./pages/CreateApplicationPage";
 
 const App = () => {
   return (
@@ -19,10 +22,15 @@ const App = () => {
         </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/ApplicationForm" element={<ApplicationForm/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/createApplication"
+            element={<CreateApplicationPage />}
+          />
+          <Route path="/createpet" element={<CreatePetPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
