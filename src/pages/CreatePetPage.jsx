@@ -51,6 +51,7 @@ const CreatePetPage = () => {
             setError(Erro)
         }
     }
+}
    
 
   return (
