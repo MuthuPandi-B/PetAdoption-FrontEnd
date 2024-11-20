@@ -28,7 +28,10 @@ const handleLogout = () => {
                             <Link to='/createpet' className='hover:text-gray-300'>Create Pet</Link>
                         </li>: null}
                         {isAdopter? <li>
-                            <Link to='/createApplication' className='hover:text-gray-300'>Application</Link>
+                            <Link to='/application/user' className='hover:text-gray-300'>Application</Link>
+                        </li>: null}
+                        {isAdopter? <li>
+                            <Link to='/createApplication' className='hover:text-gray-300'>Create Application</Link>
                         </li>: null}
                         {isfoster? <li>
                             <Link to='/fosters' className='hover:text-gray-300'>Fosters</Link>

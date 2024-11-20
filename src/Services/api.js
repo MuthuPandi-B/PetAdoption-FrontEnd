@@ -19,7 +19,7 @@ api.interceptors.request.use(
 );
 export const getFilteredPets = async (filters) => {
     const params = new URLSearchParams(filters).toString();
-    const response = await api.get(`/pets/get?${params}`);
+    const response = await api.get(`/pets?${params}`);
     return response.data;
   };
 

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../Services/api";
 
 const Register = () => {
   const navigate = useNavigate();
-  const [name, setName] = React.useState("");
-const [error, setError] = React.useState(null);
-  const [password, setPassword] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("adopter"); // Default role
+  const [error, setError] = useState(null);
 
   const handleRegister = async () => {
     try {
@@ -17,6 +17,7 @@ const [error, setError] = React.useState(null);
         name,
         email,
         password,
+        role, // Include role in the registration data
       });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.role);
@@ -28,6 +29,7 @@ const [error, setError] = React.useState(null);
       toast.error(error.response.data.message);
     }
   };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-3xl font-bold mb-4">Register</h1>
@@ -77,6 +79,23 @@ const [error, setError] = React.useState(null);
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <div className="mb-4">
+          <label
+            htmlFor="role"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Role
+          </label>
+          <select
+            id="role"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <option value="adopter">Adopter</option>
+            <option value="foster">Foster</option>
+          </select>
+        </div>
         <div className="flex items-center justify-between">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -86,14 +105,13 @@ const [error, setError] = React.useState(null);
             Register
           </button>
           <Link
-            to="/Login"
+            to="/login"
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
           >
             Already have an account? Login
           </Link>
         </div>
       </div>
-   
     </div>
   );
 };

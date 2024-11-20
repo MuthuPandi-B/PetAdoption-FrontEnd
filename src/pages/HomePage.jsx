@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api, { getFilteredPets } from '../Services/api';
 
@@ -7,6 +7,7 @@ const HomePage = () => {
   const [pets, setPets] = useState([]);
   const [filterType, setFilterType] = useState('breed'); // Default filter type
   const [filterValue, setFilterValue] = useState('');
+  const navigate = useNavigate(); // Hook to navigate programmatically
 
   useEffect(() => {
     fetchPets();
@@ -14,7 +15,7 @@ const HomePage = () => {
 
   const fetchPets = async () => {
     try {
-      const response = await api.get('/pets/get');
+      const response = await api.get('/pets'); // Adjusted path to '/pets'
       setPets(response.data);
     } catch (error) {
       toast.error('Error fetching pets.');
@@ -37,6 +38,15 @@ const HomePage = () => {
       setPets(filteredPets);
     } catch (error) {
       toast.error('Error fetching pets.');
+    }
+  };
+
+  const handleViewDetails = (petId) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate(`/pets/${petId}`);
+    } else {
+      navigate('/login');
     }
   };
 
@@ -64,16 +74,18 @@ const HomePage = () => {
       <div className="grid grid-cols-3 gap-4">
         {pets.map((pet) => (
           <div key={pet._id} className="bg-white p-4 rounded shadow">
-            <img src={pet.image} alt={pet.petName} className="w-full h-40 object-cover mb-2" />
+            <img src={pet.media} alt={pet.petName} className="w-40 h-40 object-cover mb-2" />
             <h2 className="text-lg font-semibold">Name: {pet.petName}</h2>
             <p className="text-gray-600">Breed: {pet.petBreed}</p>
             <p className="text-gray-600">Age: {pet.petAge}</p>
-            <p className="text-gray-600">Gender: {pet.petGender}</p>
-            <p className="text-gray-600">Color: {pet.petColour}</p>
             <p className="text-gray-600">Size: {pet.petSize}</p>
-            <p className="text-gray-600">Location: {pet.location}</p>
-            <p className="text-gray-600">Medical History: {pet.petMedicalhistory}</p>
-            <Link to={`/pets/${pet._id}`} className="text-blue-500 hover:underline">View Details</Link>
+            <p className="text-gray-600">Location: {pet.petLocation}</p>
+            <button
+              onClick={() => handleViewDetails(pet._id)}
+              className="text-blue-500 hover:underline"
+            >
+              View Details
+            </button>
           </div>
         ))}
       </div>

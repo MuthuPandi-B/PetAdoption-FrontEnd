@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../Services/api';
-import { useNavigate } from 'react-router-dom';
 
-const CreateApplicationPage = () => {
+const EditApplicationPage = () => {
+  const { id } = useParams(); // Get application ID from URL
+  const navigate = useNavigate();
   const [petName, setPetName] = useState('');
   const [petBreed, setPetBreed] = useState('');
   const [applicantName, setApplicantName] = useState('');
@@ -11,13 +13,35 @@ const CreateApplicationPage = () => {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [reason, setReason] = useState('');
+ 
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch application details
+    const fetchApplication = async () => {
+      try {
+        const response = await api.get(`/applications/get/${id}`);
+        const application = response.data;
+        setPetName(application.petName);
+        setPetBreed(application.petBreed);
+        setApplicantName(application.applicantName);
+        setEmail(application.email);
+        setPhone(application.phone);
+        setAddress(application.address);
+        setReason(application.reason);
+      
+      } catch (error) {
+        toast.error('Error fetching application details.');
+      }
+    };
+
+    fetchApplication();
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newApplication = {
+      const updatedApplication = {
         petName,
         petBreed,
         applicantName,
@@ -25,27 +49,28 @@ const CreateApplicationPage = () => {
         phone,
         address,
         reason,
+      
       };
-
-      const response = await api.post('/applications/create', newApplication); // Define response here
-      toast.success(response.data.message);
+      
+      await api.put(`/applications/edit/${id}`, updatedApplication);
+      toast.success('Application updated successfully.');
       setError(null);
-      navigate("/");
+      navigate('/application/user'); // Redirect to user's applications page
     } catch (error) {
       console.error("Error:", error);
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message);
         toast.error(error.response.data.message);
       } else {
-        setError("Error creating application. Please try again.");
-        toast.error("Error creating application. Please try again.");
+        setError("Error updating application. Please try again.");
+        toast.error("Error updating application. Please try again.");
       }
     }
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Create an Application</h1>
+      <h1 className="text-3xl font-bold mb-4">Edit Application</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700">Pet Name</label>
@@ -116,10 +141,11 @@ const CreateApplicationPage = () => {
             required
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">Submit Application</button>
+       
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded">Update Application</button>
       </form>
     </div>
   );
 };
 
-export default CreateApplicationPage;
+export default EditApplicationPage;
