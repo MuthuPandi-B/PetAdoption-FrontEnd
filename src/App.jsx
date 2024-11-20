@@ -16,6 +16,7 @@ import ContactPage from "./pages/ContactPage";
 
 import AppointmentPage from "./pages/AppointmentPage";
 import MessagesPage from "./pages/MessagesPage";
+import ContactMessagesPage from "./pages/ContactMessagesPage";
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/contact" element={<ContactPage/>}/>
           <Route path="/message" element={<MessagesPage/>}/>
           <Route path="/appointments/schedule" element={<AppointmentPage/>}/>
+          <Route path="/contact/messages" element={<ContactMessagesPage/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>

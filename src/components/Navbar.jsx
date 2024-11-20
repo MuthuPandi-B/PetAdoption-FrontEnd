@@ -27,6 +27,15 @@ const handleLogout = () => {
                         {isShelter? <li>
                             <Link to='/createpet' className='hover:text-gray-300'>Create Pet</Link>
                         </li>: null}
+                        {isShelter? <li>
+                            <Link to='/message' className='hover:text-gray-300'>Messages</Link>
+                        </li>: null}
+                        {isShelter? <li>
+                            <Link to='/application/all' className='hover:text-gray-300'>Applications</Link>
+                        </li>: null}
+                        {isShelter? <li>
+                            <Link to='/contact/messages' className='hover:text-gray-300'>Contact Messages</Link>
+                        </li>: null}
                         {isAdopter? <li>
                             <Link to='/application/user' className='hover:text-gray-300'>Application</Link>
                         </li>: null}
@@ -36,6 +45,10 @@ const handleLogout = () => {
                         {isfoster? <li>
                             <Link to='/fosters' className='hover:text-gray-300'>Fosters</Link>
                         </li>: null}
+                        {isfoster? <li>
+                            <Link to='/message' className='hover:text-gray-300'>Messages</Link>
+                        </li>: null}
+                
                 
                         {isAuthenticated && <li>    
                             <button onClick={handleLogout}>Logout</button>
