@@ -22,7 +22,7 @@ import ContactMessagesPage from "./pages/ContactMessagesPage";
 import FavoritePage from "./pages/FavoritesPage";
 import ReviewPage from "./pages/ReviewPage";
 import FosteringPetsPage from "./pages/FosteringPetsPages";
-
+import EditPetPage from "./pages/EditPetPage";
 const App = () => {
   return (
     <div>
@@ -43,6 +43,7 @@ const App = () => {
           />
           <Route path="/createpet" element={<CreatePetPage />} />
           <Route path="/pets/:id" element={<PetDetails />} />
+          <Route path="pets/edit/:id" element={<EditPetPage />} />
           <Route path="/application/user" element={<UserApplicationsPage />} />
           <Route path="/application/all" element={<ShelterApplicationsPage/>} />
           <Route path="/application/edit/:id" element={<EditApplicationPage/>} />

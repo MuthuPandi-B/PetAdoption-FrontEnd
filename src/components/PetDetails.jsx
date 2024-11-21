@@ -8,7 +8,7 @@ const PetDetail = () => {
   const [pet, setPet] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [user, setUser] = useState(null);
-
+ const [error, setError] = useState(null);
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
   const userId = localStorage.getItem('userId');
@@ -42,16 +42,20 @@ const PetDetail = () => {
 
   const handleDelete = async () => {
     try {
-      await api.delete(`/pets/${id}`);
+      await api.delete(`/pets/delete/${id}`);
       toast.success('Pet deleted successfully.');
+      setError(null);
       navigate('/');
     } catch (error) {
-      toast.error('Error deleting pet.');
+      setError(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
 
   const handleEdit = () => {
     navigate(`/pets/edit/${id}`);
+  
+  
   };
 
   const handleContact = () => {
