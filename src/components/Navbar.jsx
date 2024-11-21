@@ -24,11 +24,20 @@ const handleLogout = () => {
                         <li>
                             <Link to='/' className='hover:text-gray-300'>Home</Link>
                         </li>
+                        <li>
+                            <Link to='/reviews' className='hover:text-gray-300'>Review</Link>
+                        </li>
                         {isShelter? <li>
                             <Link to='/createpet' className='hover:text-gray-300'>Create Pet</Link>
                         </li>: null}
                         {isShelter? <li>
                             <Link to='/message' className='hover:text-gray-300'>Messages</Link>
+                        </li>: null}
+                        {isShelter? <li>
+                            <Link to='/fosterpets/create' className='hover:text-gray-300'>Create Foster Pet</Link>
+                        </li>: null}
+                        {isShelter? <li>
+                            <Link to='/fosterpets/create' className='hover:text-gray-300'>Foster Pet</Link>
                         </li>: null}
                         {isShelter? <li>
                             <Link to='/application/all' className='hover:text-gray-300'>Applications</Link>
@@ -37,13 +46,19 @@ const handleLogout = () => {
                             <Link to='/contact/messages' className='hover:text-gray-300'>Contact Messages</Link>
                         </li>: null}
                         {isAdopter? <li>
+                            <Link to='/favorites' className='hover:text-gray-300'>Favorite Pets</Link>
+                        </li>: null}
+                        {isAdopter? <li>
                             <Link to='/application/user' className='hover:text-gray-300'>Application</Link>
                         </li>: null}
                         {isAdopter? <li>
                             <Link to='/createApplication' className='hover:text-gray-300'>Create Application</Link>
                         </li>: null}
                         {isfoster? <li>
-                            <Link to='/fosters' className='hover:text-gray-300'>Fosters</Link>
+                            <Link to='/fosterpets/:id' className='hover:text-gray-300'>FosteringPets</Link>
+                        </li>: null}
+                        {isfoster? <li>
+                            <Link to='/fosterpets/shelter/:shelterId' className='hover:text-gray-300'>Fostering</Link>
                         </li>: null}
                         {isfoster? <li>
                             <Link to='/message' className='hover:text-gray-300'>Messages</Link>

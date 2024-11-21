@@ -3,25 +3,43 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import api from '../Services/api';
 import { toast } from 'react-toastify';
 
-
-const PetDetailsPage = () => {
+const PetDetail = () => {
   const { id } = useParams();
   const [pet, setPet] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchPet = async () => {
       try {
-        const response = await api.get(`/pets/${id}`); // Adjusted endpoint
+        const response = await api.get(`/pets/${id}`);
         setPet(response.data);
+        checkIfFavorite(response.data._id);
       } catch (error) {
         toast.error('Error fetching pet details.');
       }
     };
+
+    const checkIfFavorite = async (petId) => {
+      try {
+        const response = await api.get('/favorites');
+        const favoritePets = response.data.map(fav => fav.pet._id);
+        setIsFavorite(favoritePets.includes(petId));
+      } catch (error) {
+        toast.error('Error checking favorites.');
+      }
+    };
+
+   
+
     fetchPet();
-  }, [id]);
+   
+  }, [id, userId]);
+
   const handleDelete = async () => {
     try {
       await api.delete(`/pets/${id}`);
@@ -31,11 +49,37 @@ const PetDetailsPage = () => {
       toast.error('Error deleting pet.');
     }
   };
+
   const handleEdit = () => {
     navigate(`/pets/edit/${id}`);
   };
-  const handlestatusUpdate= async () => {
- 
+
+  const handleContact = () => {
+    navigate(`/contact`);
+  };
+
+  const handleAdopt = async () => {
+    navigate(`/contact`);
+  };
+
+  const handleAddToFavorites = async () => {
+    try {
+      await api.post('/favorites/add', { petId: id });
+      toast.success('Pet added to favorites successfully.');
+      setIsFavorite(true);
+    } catch (error) {
+      toast.error('Error adding pet to favorites.');
+    }
+  };
+
+  const handleRemoveFromFavorites = async () => {
+    try {
+      await api.post('/favorites/remove', { petId: id });
+      toast.success('Pet removed from favorites successfully.');
+      setIsFavorite(false);
+    } catch (error) {
+      toast.error('Error removing pet from favorites.');
+    }
   };
 
   if (!pet) return <div>Loading...</div>;
@@ -45,7 +89,7 @@ const PetDetailsPage = () => {
       <h1 className="text-3xl font-bold mb-4">{pet.petName}</h1>
       {pet.media && (
         <div className="mb-4">
-          {pet.media.endsWith(".mp4") ? (
+          {pet.media.endsWith('.mp4') ? (
             <video controls className="w-full h-60 object-cover mb-2">
               <source src={pet.media} type="video/mp4" />
               Your browser does not support the video tag.
@@ -66,53 +110,59 @@ const PetDetailsPage = () => {
       <p>Gender: {pet.petGender}</p>
       <p>Medical History: {pet.petMedicalhistory}</p>
       <p>Location: {pet.petLocation}</p>
-      {role === "shelter" && (
+      {role === 'shelter' && (
         <>
-          {" "}
           <button
             className="bg-yellow-500 text-white px-4 py-2 rounded mt-4"
             onClick={handleEdit}
           >
             Edit
-          </button>{" "}
+          </button>
           <button
             className="bg-red-500 text-white px-4 py-2 rounded mt-4 ml-2"
             onClick={handleDelete}
           >
             Delete
-          </button>{" "}
+          </button>
         </>
-      )}{" "}
-      {role === "foster" && (
+      )}
+      {role === 'foster' && (
         <>
-          {" "}
           <button
             className="bg-purple-500 text-white px-4 py-2 rounded mt-4"
-            onClick={() => handleStatusUpdate("Fostered")}
+            onClick={() => navigate('/fostering')}
           >
-            Update Status to Fostered
-          </button>{" "}
+            Foster
+          </button>
         </>
-      )}{" "}
-      {role === "adopter" && (
+      )}
+      {role === 'adopter' && (
         <>
-          {" "}
-          <button className="bg-green-500 text-white px-4 py-2 rounded mt-4">
-            Add to Favorites
-          </button>{" "}
-          <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4 ml-2">
+          {isFavorite ? (
+            <button
+              className="bg-red-500 text-white px-4 py-2 rounded mt-4"
+              onClick={handleRemoveFromFavorites}
+            >
+              Remove from Favorites
+            </button>
+          ) : (
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded mt-4"
+              onClick={handleAddToFavorites}
+            >
+              Add to Favorites
+            </button>
+          )}
+          <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4 ml-2" onClick={handleContact}>
             Contact
-          </button>{" "}
-          <Link
-            to={`/apply/${pet._id}`}
-            className="text-blue-500 hover:underline mt-4 block"
-          >
+          </button>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4 ml-2" onClick={handleAdopt}>
             Adopt
-          </Link>{" "}
+          </button>
         </>
       )}
     </div>
   );
 };
 
-export default PetDetailsPage;
+export default PetDetail;

@@ -8,7 +8,7 @@ const HomePage = () => {
   const [filterType, setFilterType] = useState("breed"); // Default filter type
   const [filterValue, setFilterValue] = useState("");
   const navigate = useNavigate(); // Hook to navigate programmatically
-
+ 
   useEffect(() => {
     fetchPets();
   }, []);
@@ -50,26 +50,12 @@ const HomePage = () => {
     }
   };
 
-  const handleNavigateToMessages = () => {
-    navigate("/message");
-  };
-
+ 
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-3xl font-bold">Pet Adoption</h1>
-        <button
-          onClick={handleNavigateToMessages}
-          className="text-blue-500 hover:underline"
-        >
-          <img
-            src="../Assets/message.png"
-            alt="Message"
-            className="w-8 h-8"
-          />{" "}
-          {/* Add your message icon path */}
-        </button>
-      </div>
+       </div>
       <form onSubmit={handleSearch} className="mb-4">
         <div className="flex space-x-2">
           <select
@@ -116,6 +102,7 @@ const HomePage = () => {
           </div>
         ))}
       </div>
+     
     </div>
   );
 };

@@ -13,10 +13,15 @@ import ShelterApplicationsPage from "./pages/ShelterApplicationPages";
 import UserApplicationsPage from "./pages/UserApplicationPage";
 import EditApplicationPage from "./pages/EditApplicationPage";
 import ContactPage from "./pages/ContactPage";
-
+import FosterPetDetail from "./components/FosterPetDetails";
+import FosterPetList from "./components/FosterPetList";
+import CreateFosterPet from "./pages/CreateFosterPet";
 import AppointmentPage from "./pages/AppointmentPage";
 import MessagesPage from "./pages/MessagesPage";
 import ContactMessagesPage from "./pages/ContactMessagesPage";
+import FavoritePage from "./pages/FavoritesPage";
+import ReviewPage from "./pages/ReviewPage";
+import FosteringPetsPage from "./pages/FosteringPetsPages";
 
 const App = () => {
   return (
@@ -45,6 +50,12 @@ const App = () => {
           <Route path="/message" element={<MessagesPage/>}/>
           <Route path="/appointments/schedule" element={<AppointmentPage/>}/>
           <Route path="/contact/messages" element={<ContactMessagesPage/>}/>
+          <Route path="/favorites" element={<FavoritePage/>}/>
+          <Route path="/reviews" element={<ReviewPage />} />
+          <Route path="/fosterpets/shelter/:shelterId" element={<FosterPetList />} />
+          <Route path="/fosterpets/:id" element={<FosteringPetsPage/>} />
+         <Route path="/fosterpets/create" element={<CreateFosterPet />} />
+     
         </Routes>
         <Footer />
       </BrowserRouter>
