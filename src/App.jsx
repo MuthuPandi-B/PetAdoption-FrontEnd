@@ -13,16 +13,19 @@ import ShelterApplicationsPage from "./pages/ShelterApplicationPages";
 import UserApplicationsPage from "./pages/UserApplicationPage";
 import EditApplicationPage from "./pages/EditApplicationPage";
 import ContactPage from "./pages/ContactPage";
-import FosterPetDetail from "./components/FosterPetDetails";
-import FosterPetList from "./components/FosterPetList";
+import FosterFosteringPets from "./components/FosterFosteringPets";
+import ShelterFosteringPets from "./components/ShelterFosteringPets";
 import CreateFosterPet from "./pages/CreateFosterPet";
-import AppointmentPage from "./pages/AppointmentPage";
+import CreateAppointmentPage from "./pages/CreateAppointmentPage";
 import MessagesPage from "./pages/MessagesPage";
 import ContactMessagesPage from "./pages/ContactMessagesPage";
 import FavoritePage from "./pages/FavoritesPage";
 import ReviewPage from "./pages/ReviewPage";
-import FosteringPetsPage from "./pages/FosteringPetsPages";
+
 import EditPetPage from "./pages/EditPetPage";
+import ShelterAppointments from "./components/ShelterAppointments";
+import AdopterAppointments from "./components/AdopterAppointments";
+import FosteredPets from "./components/FosteredPets";
 const App = () => {
   return (
     <div>
@@ -49,14 +52,16 @@ const App = () => {
           <Route path="/application/edit/:id" element={<EditApplicationPage/>} />
           <Route path="/contact" element={<ContactPage/>}/>
           <Route path="/message" element={<MessagesPage/>}/>
-          <Route path="/appointments/schedule" element={<AppointmentPage/>}/>
+          <Route path="/appointments/schedule" element={<CreateAppointmentPage/>}/>
           <Route path="/contact/messages" element={<ContactMessagesPage/>}/>
           <Route path="/favorites" element={<FavoritePage/>}/>
           <Route path="/reviews" element={<ReviewPage />} />
-          <Route path="/fosterpets/shelter/:shelterId" element={<FosterPetList />} />
-          <Route path="/fosterpets/:id" element={<FosteringPetsPage/>} />
+          <Route path="/shelter/fosteringpets" element={<ShelterFosteringPets />} />
+          <Route path="/foster/fosteringpets" element={<FosterFosteringPets/>} />
+          <Route path="/fosteredpets" element={<FosteredPets/>} />
          <Route path="/fosterpets/create" element={<CreateFosterPet />} />
-     
+     <Route path="/allappointments" element={<ShelterAppointments/>} />
+          <Route path="/userappointments" element={<AdopterAppointments/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

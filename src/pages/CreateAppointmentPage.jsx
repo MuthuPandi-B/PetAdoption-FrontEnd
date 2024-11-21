@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import api from '../Services/api';
 
-const AppointmentPage = () => {
+const CreateAppointmentPage = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [message, setMessage] = useState('');
@@ -59,4 +59,4 @@ const AppointmentPage = () => {
   );
 };
 
-export default AppointmentPage;
+export default CreateAppointmentPage;
