@@ -23,8 +23,9 @@ const AdopterAppointments = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">My Appointments</h1>
+     {appointments.length > 0 && <h1 className="text-3xl font-bold mb-4">Your Appointments</h1>}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {appointments.length === 0 && <p>No appointments found.</p>}
         {appointments.map((appointment) => (
           <div key={appointment._id} className="border p-4 rounded">
             <p>Date: {new Date(appointment.date).toLocaleDateString()}</p>

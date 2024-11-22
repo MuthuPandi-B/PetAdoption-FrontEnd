@@ -100,6 +100,7 @@ const ShelterApplicationsPage = () => {
           <option value="All">All</option>
         </select>
       </div>
+      {applications.length === 0 && <p>No applications found.</p>}
       {filteredApplications.map((application) => (
         <div key={application._id} className="border p-4 rounded mb-4">
           <h2 className="text-xl font-bold">

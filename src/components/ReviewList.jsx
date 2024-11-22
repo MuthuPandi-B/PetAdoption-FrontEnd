@@ -33,7 +33,8 @@ const ReviewList = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Reviews</h2>
+     {reviews.length > 0 && <h1 className="text-3xl font-bold mb-4">Reviews</h1>}
+      {reviews.length === 0 && <p>No reviews found.</p>}
       {reviews.map((review) => (
         <div key={review._id} className="border p-4 rounded mb-4 shadow-md">
           <h3 className="text-xl font-semibold">{review.user.name}</h3>
@@ -48,7 +49,7 @@ const ReviewList = () => {
             </div>
           </div>
           <p className="mb-2"><strong>Comment:</strong> {review.comment}</p>
-          <p className="mb-2"><strong>Type:</strong> {review.reviewType === 'pet' ? 'Pet' : 'Shelter'}</p>
+          <p className="mb-2"><strong>Type:</strong> {review.reviewType === 'pet' ? 'Pet' : 'Shelter'} Review</p>
           {(review.user._id === localStorage.getItem('userId') || localStorage.getItem('role') === 'shelter') && (
             <button onClick={() => handleDelete(review._id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">Delete</button>
           )}

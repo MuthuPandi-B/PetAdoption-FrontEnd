@@ -9,7 +9,8 @@ const HomePage = () => {
   const [filterType, setFilterType] = useState("breed"); // Default filter type
   const [filterValue, setFilterValue] = useState("");
   const navigate = useNavigate(); // Hook to navigate programmatically
- 
+  const role = localStorage.getItem('role'); // Get the user role
+
   useEffect(() => {
     fetchPets();
   }, []);
@@ -54,9 +55,9 @@ const HomePage = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="mb-4 flex justify-center items-center">
-        <CustomSlider/>
+        <CustomSlider />
       </div>
-     
+
       <form onSubmit={handleSearch} className="mb-4">
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
           <select
@@ -81,28 +82,45 @@ const HomePage = () => {
           </button>
         </div>
       </form>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {pets.map((pet) => (
-          <div key={pet._id} className="bg-white p-4 rounded shadow">
-            <img
-              src={pet.media}
-              alt={pet.petName}
-              className="w-full h-40 object-cover mb-2"
-            />
-            <h2 className="text-lg font-semibold">Name: {pet.petName}</h2>
-            <p className="text-gray-600">Breed: {pet.petBreed}</p>
-            <p className="text-gray-600">Age: {pet.petAge}</p>
-            <p className="text-gray-600">Size: {pet.petSize}</p>
-            <p className="text-gray-600">Location: {pet.petLocation}</p>
-            <button
-              onClick={() => handleViewDetails(pet._id)}
-              className="text-blue-500 hover:underline"
-            >
-              View Details
-            </button>
-          </div>
-        ))}
-      </div>
+     {pets.length > 0 && <h2 className="text-2xl font-semibold mb-4">Available Pets</h2>}
+      {pets.length === 0 ? (
+        <div className="text-center text-gray-600">
+          {role === "adopter" ? (
+            <>
+              <p>Currently, no pets are available for adoption.</p>
+              <p>Create an application for your desired pet or wait for some time.</p>
+              <Link to="/createApplication" className="text-blue-500 hover:underline">
+                Create Application
+              </Link>
+            </>
+          ) : (
+            <p>Currently, no pets are available for adoption.</p>
+          )}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {pets.map((pet) => (
+            <div key={pet._id} className="bg-white p-4 rounded shadow">
+              <img
+                src={pet.media}
+                alt={pet.petName}
+                className="w-80 h-80 object-cover mb-2"
+              />
+              <h2 className="text-lg font-semibold"> {pet.petName}</h2>
+              <p className="text-gray-600">Breed: {pet.petBreed}</p>
+              <p className="text-gray-600">Age: {pet.petAge}</p>
+              <p className="text-gray-600">Size: {pet.petSize}</p>
+              <p className="text-gray-600">Location: {pet.petLocation}</p>
+              <button
+                onClick={() => handleViewDetails(pet._id)}
+                className="text-blue-500 hover:underline"
+              >
+                View Details
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -16,9 +16,7 @@ const Footer = () => {
           <Link to="/" className="hover:text-gray-300">
             Home
           </Link>
-          <Link to="/pets" className="hover:text-gray-300">
-            Pets
-          </Link>
+          
           {isShelter ? (
             <li className="list-none">
               <Link to="/contact/messages" className="hover:text-gray-300">
@@ -33,7 +31,7 @@ const Footer = () => {
               </Link>
             </li>
           ) : null}
-          <li> <Link to='/reviews' className='hover:text-gray-300'>Review</Link> </li>
+          <li className="list-none"> <Link to='/reviews' className='hover:text-gray-300 '>User Reviews</Link> </li>
           <Link to="/about" className="hover:text-gray-300">
             About
           </Link>

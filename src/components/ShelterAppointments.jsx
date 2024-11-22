@@ -59,6 +59,7 @@ const ShelterAppointments = () => {
         </select>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {filteredAppointments.length === 0 && <p>No appointments found.</p>}
         {filteredAppointments.map((appointment) => (
           <div key={appointment._id} className="border p-4 rounded">
             <p>Date: {new Date(appointment.date).toLocaleDateString()}</p>

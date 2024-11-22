@@ -93,7 +93,7 @@ const Navbar = () => {
               <Link to='shelter/fosteringpets' className='hover:text-gray-300'>Foster Pet</Link>
             </li>}
             {isfoster && <li>
-              <Link to='/foster/fosteringpets' className='hover:text-gray-300'>FosteringPets</Link>
+              <Link to='/foster/fosteringpets' className='hover:text-gray-300'>Foster-ReadyPets</Link>
             </li>}
             {isAdopter && <li>
               <Link to='/favorites' className='hover:text-gray-300'>Favorite Pets</Link>

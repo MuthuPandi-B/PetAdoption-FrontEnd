@@ -47,7 +47,7 @@ const ShelterFosteringPets = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Shelter's Fostered Pets</h1>
+      <h1 className="text-3xl font-bold mb-4">Foster Pets</h1>
       <div className="mb-4">
         <label className="block text-gray-700">Filter by Status</label>
         <select
@@ -63,6 +63,7 @@ const ShelterFosteringPets = () => {
         </select>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {filteredPets.length === 0 && <p>No pets found.</p>}
         {filteredPets.map((pet) => (
           <div key={pet._id} className="border p-4 rounded">
             <h2 className="text-2xl font-bold">{pet.name}</h2>

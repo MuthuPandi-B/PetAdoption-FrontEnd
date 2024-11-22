@@ -83,6 +83,7 @@ const MessagesPage = () => {
       </form>
       <div className="mt-8">
         <h2 className="text-2xl font-bold mb-4">Conversations</h2>
+        {conversations.length === 0 && <p>No conversations found.</p>}
         {conversations.map(conversation => (
           <div key={conversation._id} className="border p-4 rounded mb-4">
             <p><strong>From:</strong> {conversation.sender.name}</p>

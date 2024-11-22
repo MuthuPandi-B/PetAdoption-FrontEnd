@@ -33,6 +33,7 @@ const ContactMessagesPage = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Contact Messages</h1>
+      {messages.length === 0 && <p>No messages found.</p>}
       {messages.map((message) => (
         <div key={message._id} className="border p-4 rounded mb-4">
           <p><strong>Email:</strong> {message.email}</p>
