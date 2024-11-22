@@ -3,11 +3,11 @@ import React from 'react';
 const AboutPage = () => {
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">About Pet Adoption</h1>
+      <h1 className="text-3xl font-bold mb-4">About Adopt-A-Pet</h1>
       
       <section className="mb-6">
         <h2 className="text-2xl font-bold">Our Mission</h2>
-        <p>At Pet Adoption, we believe every animal deserves a loving and caring home. Our mission is to connect homeless pets with individuals and families looking to adopt, ensuring every pet finds their perfect match. We strive to make the adoption process seamless, informative, and compassionate.</p>
+        <p>At Adopt-A-Pet, we believe every animal deserves a loving and caring home. Our mission is to connect homeless pets with individuals and families looking to adopt, ensuring every pet finds their perfect match. We strive to make the adoption process seamless, informative, and compassionate.</p>
       </section>
       
       <section className="mb-6">

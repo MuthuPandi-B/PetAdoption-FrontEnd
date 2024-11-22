@@ -49,7 +49,8 @@ const Navbar = () => {
     <div>
       <nav className='bg-gray-700 p-4 text-white'>
         <div className='container mx-auto flex justify-between items-center'>
-          <h1 className='text-2xl font-bold'>Pet Adoption</h1>
+          <div className='flex gap-3'><img className='w-8 h-8 rounded-full' src="/src/Assets/logo.png" alt="Logo" />
+          <h1 className='text-2xl font-bold'>Adopt-A-Pet</h1></div>
           <div className='flex items-center md:hidden'>
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)} 

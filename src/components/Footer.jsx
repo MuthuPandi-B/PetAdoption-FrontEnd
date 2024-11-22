@@ -54,7 +54,7 @@ const Footer = () => {
       </div>
       <div className="text-center mt-4">
         <p>
-          &copy; {new Date().getFullYear()} Pet Adoption Platform. All rights reserved.
+          &copy; {new Date().getFullYear()} Adopt-A-Pet Platform. All rights reserved.
         </p>
       </div>
     </footer>
