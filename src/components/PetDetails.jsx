@@ -130,7 +130,7 @@ const PetDetail = () => {
           </button>
         </>
       )}
-      {role === 'foster' && (
+      {/* {role === 'foster' && (
         <>
           <button
             className="bg-purple-500 text-white px-4 py-2 rounded mt-4"
@@ -139,7 +139,7 @@ const PetDetail = () => {
             Foster
           </button>
         </>
-      )}
+      )} */}
       {role === 'adopter' && (
         <>
           {isFavorite ? (

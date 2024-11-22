@@ -26,6 +26,8 @@ import EditPetPage from "./pages/EditPetPage";
 import ShelterAppointments from "./components/ShelterAppointments";
 import AdopterAppointments from "./components/AdopterAppointments";
 import FosteredPets from "./components/FosteredPets";
+import AboutPage from "./pages/AboutPage";
+import ResetPassword from "./components/ResetPassword";
 const App = () => {
   return (
     <div>
@@ -62,6 +64,8 @@ const App = () => {
          <Route path="/fosterpets/create" element={<CreateFosterPet />} />
      <Route path="/allappointments" element={<ShelterAppointments/>} />
           <Route path="/userappointments" element={<AdopterAppointments/>} />
+          <Route path="/about" element={<AboutPage/>} />
+          <Route path="/reset-password/:resetToken" element={<ResetPassword/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

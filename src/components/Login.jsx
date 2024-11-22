@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../Services/api";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,8 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await api.post("/auth/login", { email, password });
-     console.log(response.data);
-      // console.log(response.data);
+      console.log(response.data);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.role);
       toast.success(response.data.message);
@@ -30,6 +28,20 @@ const Login = () => {
     setEmail("");
     setPassword("");
   };
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      toast.error("Please enter your email address.");
+      return;
+    }
+    try {
+      const response = await api.post("/auth/forgot-password", { email });
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <div className="container mx-auto mt-8">
       <form
@@ -79,6 +91,15 @@ const Login = () => {
           >
             Register
           </Link>
+        </div>
+        <div className="flex items-center justify-between mt-4">
+          <button
+            type="button"
+            onClick={handleForgotPassword}
+            className="text-sm font-bold text-blue-500 hover:text-blue-800"
+          >
+            Forgot Password?
+          </button>
         </div>
       </form>
     </div>

@@ -21,10 +21,10 @@ const ShelterApplicationsPage = () => {
   };
 
   const handleApprove = async (id) => {
-    const reason = prompt("Enter the reason for approval:");
-    if (reason) {
+    const shelternotes = prompt("Enter the reason for approval:");
+    if (shelternotes) {
       try {
-        await api.patch(`/applications/approve/${id}`, { reason });
+        await api.patch(`/applications/approve/${id}`, { shelternotes });
         toast.success("Application approved successfully.");
         fetchApplications();
       } catch (error) {
@@ -34,10 +34,10 @@ const ShelterApplicationsPage = () => {
   };
 
   const handleReject = async (id) => {
-    const reason = prompt("Enter the reason for rejection:");
-    if (reason) {
+    const shelternotes = prompt("Enter the reason for rejection:");
+    if (shelternotes) {
       try {
-        await api.patch(`/applications/reject/${id}`, { reason });
+        await api.patch(`/applications/reject/${id}`, { shelternotes });
         toast.success("Application rejected successfully.");
         fetchApplications();
       } catch (error) {
@@ -57,10 +57,10 @@ const ShelterApplicationsPage = () => {
   };
 
   const handleRequestInfo = async (id) => {
-    const message = prompt("Enter the message for additional information:");
-    if (message) {
+    const shelternotes = prompt("Enter the message for additional information:");
+    if (shelternotes) {
       try {
-        await api.post(`/applications/request-info/${id}`, { message });
+        await api.post(`/applications/request-info/${id}`, { shelternotes });
         toast.success("Request for additional information sent.");
         fetchApplications();
       } catch (error) {
@@ -122,10 +122,10 @@ const ShelterApplicationsPage = () => {
               <p><strong>Address:</strong> {application.address}</p>
               <p><strong>User Id:</strong> {application.creator}</p>
               {application.status === "Approved" && (
-                <p><strong>Approval Reason:</strong> {application.reason}</p>
+                <p><strong>Approval Reason:</strong> {application.shelternotes}</p>
               )}
               {application.status === "Rejected" && (
-                <p><strong>Rejection Reason:</strong> {application.reason}</p>
+                <p><strong>Rejection Reason:</strong> {application.shelternotes}</p>
               )}
               {application.status === "Meet-and-Greet Scheduled" && (
                 <>
@@ -134,7 +134,7 @@ const ShelterApplicationsPage = () => {
                 </>
               )}
               {application.status === "Additional Information Needed" && (
-                <p><strong>Additional Info Note:</strong> {application.reason}</p>
+                <p><strong>Additional Info Note:</strong> {application.shelternotes}</p>
               )}
             </div>
           )}

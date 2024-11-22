@@ -33,6 +33,7 @@ const Footer = () => {
               </Link>
             </li>
           ) : null}
+          <li> <Link to='/reviews' className='hover:text-gray-300'>Review</Link> </li>
           <Link to="/about" className="hover:text-gray-300">
             About
           </Link>

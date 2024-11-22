@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import api, { getFilteredPets } from "../Services/api";
+import CustomSlider from "../components/Slider";
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
@@ -50,18 +51,18 @@ const HomePage = () => {
     }
   };
 
- 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl font-bold">Pet Adoption</h1>
-       </div>
+      <div className="mb-4 flex justify-center items-center">
+        <CustomSlider/>
+      </div>
+     
       <form onSubmit={handleSearch} className="mb-4">
-        <div className="flex space-x-2">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
           <select
             onChange={handleFilterTypeChange}
             value={filterType}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full sm:w-auto"
           >
             <option value="breed">Breed</option>
             <option value="age">Age</option>
@@ -73,20 +74,20 @@ const HomePage = () => {
             placeholder={`Enter ${filterType}`}
             value={filterValue}
             onChange={(e) => setFilterValue(e.target.value)}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full sm:w-auto flex-grow"
           />
-          <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+          <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full sm:w-auto">
             Search
           </button>
         </div>
       </form>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {pets.map((pet) => (
           <div key={pet._id} className="bg-white p-4 rounded shadow">
             <img
               src={pet.media}
               alt={pet.petName}
-              className="w-40 h-40 object-cover mb-2"
+              className="w-full h-40 object-cover mb-2"
             />
             <h2 className="text-lg font-semibold">Name: {pet.petName}</h2>
             <p className="text-gray-600">Breed: {pet.petBreed}</p>
@@ -102,7 +103,6 @@ const HomePage = () => {
           </div>
         ))}
       </div>
-     
     </div>
   );
 };

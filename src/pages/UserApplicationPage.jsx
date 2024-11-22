@@ -41,7 +41,7 @@ const UserApplicationsPage = () => {
             <p><strong>Rejection Reason:</strong> {application.reason}</p>
           )}
           {application.status === 'Approved' && (
-            <p><strong>Approval Reason:</strong> {application.reason}</p>
+            <p><strong>Approval Reason:</strong> {application.shelternotes}</p>
           )}
           {application.status === 'Additional Information Needed' && (
             <p><strong>Additional Info Message:</strong> {application.reason}</p>
