@@ -5,27 +5,27 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const imageQuotes = [
   {
-    src: '/src/Assets/pet1.jpg',
+    src: '/src/assets/pet1.jpg',
     quote: 'The best therapist has fur and four legs.',
   },
   {
-    src: '/src/Assets/pet2.jpg',
+    src: '/src/assets/pet2.jpg',
     quote: 'Adopt, don’t shop!',
   },
   {
-    src: '/src/Assets/pet7.jpg',
+    src: '/src/assets/pet7.jpg',
     quote: 'Pets leave paw prints on your heart.',
   },
   {
-    src: '/src/Assets/pet4.jpg',
+    src: '/src/assets/pet4.jpg',
     quote: 'Happiness is a warm puppy.',
   },
   {
-    src: '/src/Assets/pet6.jpg',
+    src: '/src/assets/pet6.jpg',
     quote: 'Until one has loved an animal, a part of one’s soul remains unawakened.',
   },
   {
-    src: '/src/Assets/pet5.jpg',
+    src: '/src/assets/pet5.jpg',
     quote: 'Saving one dog will not change the world, but surely for that one dog, the world will change forever.',
   },
 ];
