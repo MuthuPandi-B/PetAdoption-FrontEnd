@@ -37,7 +37,7 @@ const ReviewList = () => {
       {reviews.length === 0 && <p>No reviews found.</p>}
       {reviews.map((review) => (
         <div key={review._id} className="border p-4 rounded mb-4 shadow-md">
-          <h3 className="text-xl font-semibold">{review.user.name}</h3>
+          <h3 className="text-xl font-semibold">User:  {review.user.name}</h3>
           <div className="flex items-center mb-2">
             <span className="mr-2">Rating:</span>
             <div className="flex">
