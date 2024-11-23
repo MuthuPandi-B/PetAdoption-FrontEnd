@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api =axios.create ({
-    baseURL: 'https://petadoption-backend-fyy5.onrender.com',
+    baseURL: 'https://petadoption-backend-fyy5.onrender.com/api',
 
 });
 api.interceptors.request.use(
