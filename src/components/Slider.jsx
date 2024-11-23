@@ -10,23 +10,23 @@ const imageQuotes = [
     quote: 'The best therapist has fur and four legs.',
   },
   {
-    src: '/public/assets/pet2.jpg',
+    src: '/assets/pet2.jpg',
     quote: 'Adopt, don’t shop!',
   },
   {
-    src: '/public/assets/pet7.jpg',
+    src: '/assets/pet7.jpg',
     quote: 'Pets leave paw prints on your heart.',
   },
   {
-    src: '/public/assets/pet4.jpg',
+    src: '/assets/pet4.jpg',
     quote: 'Happiness is a warm puppy.',
   },
   {
-    src: '/public/assets/pet6.jpg',
+    src: '/assets/pet6.jpg',
     quote: 'Until one has loved an animal, a part of one’s soul remains unawakened.',
   },
   {
-    src: '/public/assets/pet5.jpg',
+    src: '/assets/pet5.jpg',
     quote: 'Saving one dog will not change the world, but surely for that one dog, the world will change forever.',
   },
 ];

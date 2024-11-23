@@ -43,7 +43,7 @@ const Footer = () => {
               className="text-blue-500 hover:underline"
             >
               <img
-                src="/public/assets/message.png"
+                src="/assets/message.png"
                 alt="Message"
                 className="w-10 h-10 rounded-full"
               />{" "}
