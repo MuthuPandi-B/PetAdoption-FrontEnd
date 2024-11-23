@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const imageQuotes = [
   {
-    src: '/assets/pet1.jpg',
+    src: 'assets\pet1.jpg',
     quote: 'The best therapist has fur and four legs.',
   },
   {
