@@ -53,7 +53,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 bg-gray-400">
+    <div className="container mx-auto p-4">
       <div className="mb-4 flex justify-center items-center">
         <CustomSlider />
       </div>
