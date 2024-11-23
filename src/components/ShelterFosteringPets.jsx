@@ -40,6 +40,18 @@ const ShelterFosteringPets = () => {
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
+  const handledelete = async (id) => {
+    try {
+      const response = await api.delete(`/fosterpets/delete/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      toast.success(response.data.message);
+      const updatedPets = fosterPets.filter(pet => pet._id !== id);
+      setFosterPets(updatedPets);
+    } catch (error) {
+      toast.error('Error deleting pet.');
+    }
+  };
 
   const filteredPets = filter === 'All'
     ? fosterPets
@@ -80,8 +92,13 @@ const ShelterFosteringPets = () => {
                 <p>{pet.notes}</p>
               </>
             )}
+              {(pet.status === 'Returned' || pet.status === 'Pending')&&  (
+              <button className="bg-red-500 text-white p-2 rounded mt-4" onClick={() => handledelete(pet._id)}>Delete Pet</button>
+            )}
           </div>
+          
         ))}
+     
       </div>
     </div>
   );
