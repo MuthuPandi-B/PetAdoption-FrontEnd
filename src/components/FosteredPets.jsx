@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 const FosteredPets = () => {
   const [fosterPets, setFosterPets] = useState([]);
   const [note, setNote] = useState('');
+  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -16,6 +17,8 @@ const FosteredPets = () => {
         setFosterPets(response.data);
       } catch (error) {
         toast.error('Error fetching foster pets.');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -72,35 +75,60 @@ const FosteredPets = () => {
 
   return (
     <div className="container mx-auto p-4">
-     {fosterPets.length > 0 &&  <h1 className="text-2xl font-bold mb-4">Pets In your Care</h1>}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {fosterPets.length === 0 && <p>There are no pets under your care at the moment.</p>}
-        {fosterPets.map((pet) => (
-          <div key={pet._id} className="border p-4 rounded">
-            <h2 className="text-2xl font-bold">{pet.name}</h2>
-            <p>Breed: {pet.breed}</p>
-            <p>Age: {pet.age}</p>
-            <p>Medical History: {pet.medicalHistory}</p>
-            <p>Status: {pet.status}</p>
-            {pet.status === 'Pending' ? (
-              <button className="bg-yellow-500 text-white p-2 rounded mt-4" onClick={() => handleRequestFostering(pet._id)}>Request to Foster</button>
-            ) : pet.status === 'In Foster Care' || pet.status === 'Requested' ? (
-              <>
-                <textarea
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
-                  value={note}
-                  onChange={(e) => setNote(e.target.value)}
-                  placeholder="Update pet condition"
-                ></textarea>
-                <button className="bg-blue-500 text-white p-2 rounded mt-4" onClick={() => handleUpdateCondition(pet._id)}>Update Condition</button>
-                <button className="bg-red-500 text-white p-2 rounded mt-4" onClick={() => handleRequestReturn(pet._id)}>Request Return</button>
-              </>
-            ) : pet.status === 'Returned' ? (
-              <p className="text-red-500">This pet has been returned.</p>
-            ) : null}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          {fosterPets.length > 0 && (
+            <h1 className="text-2xl font-bold mb-4">Pets In Your Care</h1>
+          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {fosterPets.length === 0 && (
+              <p>There are no pets under your care at the moment.</p>
+            )}
+            {fosterPets.map((pet) => (
+              <div key={pet._id} className="border p-4 rounded shadow-lg">
+                <h2 className="text-2xl font-bold">{pet.name}</h2>
+                <p>Breed: {pet.breed}</p>
+                <p>Age: {pet.age}</p>
+                <p>Medical History: {pet.medicalHistory}</p>
+                <p>Status: {pet.status}</p>
+                {pet.status === 'Pending' ? (
+                  <button
+                    className="bg-yellow-500 text-white p-2 rounded mt-4 hover:bg-yellow-600"
+                    onClick={() => handleRequestFostering(pet._id)}
+                  >
+                    Request to Foster
+                  </button>
+                ) : pet.status === 'In Foster Care'  ? (
+                  <>
+                    <textarea
+                      className="w-full p-2 border border-gray-300 rounded mt-1"
+                      value={note}
+                      onChange={(e) => setNote(e.target.value)}
+                      placeholder="Update pet condition"
+                    ></textarea>
+                    <button
+                      className="bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600"
+                      onClick={() => handleUpdateCondition(pet._id)}
+                    >
+                      Update Condition
+                    </button>
+                    <button
+                      className="bg-red-500 text-white p-2 rounded mt-4 hover:bg-red-600"
+                      onClick={() => handleRequestReturn(pet._id)}
+                    >
+                      Request Return
+                    </button>
+                  </>
+                ) : pet.status === 'Returned' ? (
+                  <p className="text-red-500">This pet has been returned.</p>
+                ) : null}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 };

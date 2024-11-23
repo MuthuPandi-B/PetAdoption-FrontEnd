@@ -13,11 +13,14 @@ const CreatePetPage = () => {
   const [petGender, setPetGender] = useState("");
   const [media, setMedia] = useState(null);
   const [petLocation, setPetLocation] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     if (
       !petName ||
       !petBreed ||
@@ -29,6 +32,7 @@ const CreatePetPage = () => {
       !petLocation
     ) {
       setError("All fields are required");
+      setLoading(false);
       return;
     }
 
@@ -65,15 +69,7 @@ const CreatePetPage = () => {
       }
     }
 
-    setPetName("");
-    setPetBreed("");
-    setPetAge("");
-    setPetSize("");
-    setPetColour("");
-    setPetMedicalhistory("");
-    setPetGender("");
-    setPetLocation("");
-    setMedia(null);
+    setLoading(false);
   };
 
   return (
@@ -83,7 +79,7 @@ const CreatePetPage = () => {
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
           <label htmlFor="petName" className="block text-gray-700 font-bold mb-2">
-            Pet Name
+            Pet Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -95,7 +91,7 @@ const CreatePetPage = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="petBreed" className="block text-gray-700 font-bold mb-2">
-            Pet Breed
+            Pet Breed <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -107,7 +103,7 @@ const CreatePetPage = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="petAge" className="block text-gray-700 font-bold mb-2">
-            Pet Age
+            Pet Age <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -119,7 +115,7 @@ const CreatePetPage = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="petSize" className="block text-gray-700 font-bold mb-2">
-            Pet Size
+            Pet Size <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -131,7 +127,7 @@ const CreatePetPage = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="petColour" className="block text-gray-700 font-bold mb-2">
-            Pet Colour
+            Pet Colour <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -143,7 +139,7 @@ const CreatePetPage = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="petMedicalhistory" className="block text-gray-700 font-bold mb-2">
-            Pet Medical History
+            Pet Medical History <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -155,7 +151,7 @@ const CreatePetPage = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="petGender" className="block text-gray-700 font-bold mb-2">
-            Pet Gender
+            Pet Gender <span className="text-red-500">*</span>
           </label>
           <select
             id="petGender"
@@ -170,7 +166,7 @@ const CreatePetPage = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="petLocation" className="block text-gray-700 font-bold mb-2">
-            Pet Location
+            Pet Location <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -195,8 +191,9 @@ const CreatePetPage = () => {
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-8 py-2 px-4 rounded"
+          disabled={loading}
         >
-          Create Pet
+          {loading ? "Submitting..." : "Create Pet"}
         </button>
       </form>
     </div>

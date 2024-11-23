@@ -11,11 +11,13 @@ const CreateApplicationPage = () => {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [reason, setReason] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const newApplication = {
         petName,
@@ -27,7 +29,7 @@ const CreateApplicationPage = () => {
         reason,
       };
 
-      const response = await api.post('/applications/create', newApplication); // Define response here
+      const response = await api.post('/applications/create', newApplication);
       toast.success(response.data.message);
       setError(null);
       navigate("/");
@@ -41,12 +43,13 @@ const CreateApplicationPage = () => {
         toast.error("Error creating application. Please try again.");
       }
     }
+    setLoading(false);
   };
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Create an Application</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
         <div className="mb-4">
           <label className="block text-gray-700">Pet Name</label>
           <input
@@ -116,7 +119,13 @@ const CreateApplicationPage = () => {
             required
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">Submit Application</button>
+        {error && <p className="text-red-500">{error}</p>}
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          {loading ? 'Submitting...' : 'Submit Application'}
+        </button>
       </form>
     </div>
   );

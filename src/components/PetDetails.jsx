@@ -63,8 +63,12 @@ const PetDetail = () => {
   };
 
   const handleAdopt = async () => {
-    navigate(`/contact`);
-  };
+     try { const response = await api.post(`/pets/adopt/${pet._id}`);
+      toast.success(response.data.message);
+     } catch (error) {
+       toast.error("Error submitting adoption request");
+       }
+      };
 
   const handleAddToFavorites = async () => {
     try {
@@ -85,6 +89,8 @@ const PetDetail = () => {
       toast.error('Error removing pet from favorites.');
     }
   };
+  
+
 
   if (!pet) return <div>Loading...</div>;
 
