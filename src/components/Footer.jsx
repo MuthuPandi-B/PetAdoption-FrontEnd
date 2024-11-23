@@ -37,7 +37,7 @@ const Footer = () => {
           </Link>
         </div>
         {isAuthenticated && (
-          <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
+          <div className="mt-6  absolute right-0 top-1/2 transform -translate-y-1/2">
             <button
               onClick={handleNavigateToMessages}
               className="text-blue-500 hover:underline"
@@ -45,7 +45,7 @@ const Footer = () => {
               <img
                 src="/assets/message.png"
                 alt="Message"
-                className="w-10 h-10 rounded-full"
+                className="w-6 h-6 md:w-10 md:h-10 rounded-full"
               />{" "}
               {/* Add your message icon path */}
             </button>
