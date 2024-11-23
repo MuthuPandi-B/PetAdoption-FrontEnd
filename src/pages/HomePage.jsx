@@ -6,10 +6,10 @@ import CustomSlider from "../components/Slider";
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
-  const [filterType, setFilterType] = useState("breed"); // Default filter type
+  const [filterType, setFilterType] = useState("breed"); 
   const [filterValue, setFilterValue] = useState("");
-  const navigate = useNavigate(); // Hook to navigate programmatically
-  const role = localStorage.getItem('role'); // Get the user role
+  const navigate = useNavigate();
+  const role = localStorage.getItem('role'); 
 
   useEffect(() => {
     fetchPets();
@@ -17,7 +17,7 @@ const HomePage = () => {
 
   const fetchPets = async () => {
     try {
-      const response = await api.get("/pets"); // Adjusted path to '/pets'
+      const response = await api.get("/pets"); 
       setPets(response.data);
     } catch (error) {
       toast.error("Error fetching pets.");
@@ -34,7 +34,7 @@ const HomePage = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    const filters = { [filterType]: filterValue }; // Create a filter object based on the selected type and value
+    const filters = { [filterType]: filterValue }; 
     try {
       const filteredPets = await getFilteredPets(filters);
       setPets(filteredPets);
