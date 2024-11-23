@@ -55,7 +55,7 @@ const HomePage = () => {
   return (
     <div className="container mx-auto p-4 bg-grey-500">
       <div className="mb-4 flex justify-center items-center">
-        {/* <CustomSlider /> */}
+        <CustomSlider />
       </div>
 
       <form onSubmit={handleSearch} className="mb-4">
