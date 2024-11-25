@@ -63,9 +63,9 @@ const FosterFosteringPets = () => {
 
   return (
     <div className="container mx-auto p-4">
-      {fosterPets.length > 0 && <h1 className="text-2xl font-bold mb-4">Available Pets For Foster</h1>}
+      {fosterPets.length > 0 && <h1 className="text-2xl font-bold mb-4 text-center">Available Pets For Foster</h1>}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {fosterPets.length === 0 && <p>No foster pets available at the moment.</p>}
+        {fosterPets.length === 0 && <p className='text-center'>No foster pets available at the moment.</p>}
         {fosterPets.map((pet) => (
           <div key={pet._id} className="border p-4 rounded">
             <h2 className="text-2xl font-bold">{pet.name}</h2>

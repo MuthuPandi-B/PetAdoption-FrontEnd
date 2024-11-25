@@ -75,16 +75,17 @@ const FosteredPets = () => {
 
   return (
     <div className="container mx-auto p-4">
+    
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
           {fosterPets.length > 0 && (
-            <h1 className="text-2xl font-bold mb-4">Pets In Your Care</h1>
+            <h1 className="text-2xl font-bold mb-4 text-center">Pets In Your Care</h1>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {fosterPets.length === 0 && (
-              <p>There are no pets under your care at the moment.</p>
+              <p className='text-center'>There are no pets under your care at the moment.</p>
             )}
             {fosterPets.map((pet) => (
               <div key={pet._id} className="border p-4 rounded shadow-lg">

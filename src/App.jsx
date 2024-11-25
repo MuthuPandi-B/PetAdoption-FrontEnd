@@ -21,13 +21,14 @@ import MessagesPage from "./pages/MessagesPage";
 import ContactMessagesPage from "./pages/ContactMessagesPage";
 import FavoritePage from "./pages/FavoritesPage";
 import ReviewPage from "./pages/ReviewPage";
-
 import EditPetPage from "./pages/EditPetPage";
 import ShelterAppointments from "./components/ShelterAppointments";
 import AdopterAppointments from "./components/AdopterAppointments";
 import FosteredPets from "./components/FosteredPets";
 import AboutPage from "./pages/AboutPage";
 import ResetPassword from "./components/ResetPassword";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import NotFound from "./pages/NotFound";
 const App = () => {
   return (
     <div>
@@ -42,30 +43,28 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/createApplication"
-            element={<CreateApplicationPage />}
-          />
-          <Route path="/createpet" element={<CreatePetPage />} />
-          <Route path="/pets/:id" element={<PetDetails />} />
-          <Route path="pets/edit/:id" element={<EditPetPage />} />
-          <Route path="/application/user" element={<UserApplicationsPage />} />
-          <Route path="/application/all" element={<ShelterApplicationsPage/>} />
-          <Route path="/application/edit/:id" element={<EditApplicationPage/>} />
+          <Route path="/createApplication" element={<ProtectedRoutes adopterOnly><CreateApplicationPage /></ProtectedRoutes>}/>
+          <Route path="/createpet" element={<ProtectedRoutes shelterOnly><CreatePetPage /></ProtectedRoutes> } />
+          <Route path="/pets/:id" element={<ProtectedRoutes><PetDetails /></ProtectedRoutes>} />
+          <Route path="pets/edit/:id" element={<ProtectedRoutes shelterOnly><EditPetPage /></ProtectedRoutes>} />
+          <Route path="/application/user" element={<ProtectedRoutes><UserApplicationsPage /></ProtectedRoutes>} />
+          <Route path="/application/all" element={<ProtectedRoutes shelterOnly><ShelterApplicationsPage/></ProtectedRoutes>} />
+          <Route path="/application/edit/:id" element={<ProtectedRoutes ><EditApplicationPage/></ProtectedRoutes>} />
           <Route path="/contact" element={<ContactPage/>}/>
-          <Route path="/message" element={<MessagesPage/>}/>
-          <Route path="/appointments/schedule" element={<CreateAppointmentPage/>}/>
-          <Route path="/contact/messages" element={<ContactMessagesPage/>}/>
-          <Route path="/favorites" element={<FavoritePage/>}/>
+          <Route path="/message" element={<ProtectedRoutes ><MessagesPage/></ProtectedRoutes>}/>
+          <Route path="/appointments/schedule" element={<ProtectedRoutes ><CreateAppointmentPage/></ProtectedRoutes>}/>
+          <Route path="/contact/messages" element={<ProtectedRoutes shelterOnly><ContactMessagesPage/></ProtectedRoutes>}/>
+          <Route path="/favorites" element={<ProtectedRoutes><FavoritePage/></ProtectedRoutes>}/>
           <Route path="/reviews" element={<ReviewPage />} />
-          <Route path="/shelter/fosteringpets" element={<ShelterFosteringPets />} />
-          <Route path="/foster/fosteringpets" element={<FosterFosteringPets/>} />
-          <Route path="/fosteredpets" element={<FosteredPets/>} />
-         <Route path="/fosterpets/create" element={<CreateFosterPet />} />
-     <Route path="/allappointments" element={<ShelterAppointments/>} />
+          <Route path="/shelter/fosteringpets" element={<ProtectedRoutes shelterOnly><ShelterFosteringPets /></ProtectedRoutes>} />
+          <Route path="/foster/fosteringpets" element={<ProtectedRoutes fosterOnly><FosterFosteringPets/></ProtectedRoutes>} />
+          <Route path="/fosteredpets" element={<ProtectedRoutes fosterOnly><FosteredPets/></ProtectedRoutes>} />
+          <Route path="/fosterpets/create" element={<ProtectedRoutes shelterOnly><CreateFosterPet /></ProtectedRoutes>} />
+          <Route path="/allappointments" element={<ProtectedRoutes shelterOnly><ShelterAppointments/></ProtectedRoutes>} />
           <Route path="/userappointments" element={<AdopterAppointments/>} />
           <Route path="/about" element={<AboutPage/>} />
           <Route path="/reset-password/:resetToken" element={<ResetPassword/>} />
+          <Route path="*" element={<NotFound />}/>
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -33,7 +33,7 @@ const ReviewList = () => {
 
   return (
     <div className="container mx-auto p-4">
-     {reviews.length > 0 && <h1 className="text-3xl font-bold mb-4">Reviews</h1>}
+  
       {reviews.length === 0 && <p>No reviews found.</p>}
       {reviews.map((review) => (
         <div key={review._id} className="border p-4 rounded mb-4 shadow-md">
