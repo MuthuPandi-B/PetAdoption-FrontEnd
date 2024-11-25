@@ -1,7 +1,7 @@
 import React from "react";
 const NotFound = () => {
     return (
-        <div className=" justify-center">
+        <div className="flex flex-col items-center justify-center min-h-screen">
         <img
           src="https://admiral.digital/wp-content/uploads/2023/08/404_page-not-found.png"
           alt="Page Not Found"
